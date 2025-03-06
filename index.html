@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosso Tempo Juntos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #111;
+            color: white;
+            padding: 20px;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            background: #333;
+            padding: 20px;
+            border-radius: 10px;
+            position: relative;
+            box-shadow: 0px 0px 20px 7px #700909;
+        }
+        .slider {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .slides img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .prev { left: 10px; }
+        .next { right: 10px; }
+        .contador {
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+        .h2 {
+            padding-bottom: 0px;
+            margin-bottom: 0px;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="slider">
+            <div class="slides" id="slides">
+                <img src="imagem.png" alt="Foto 1">
+                <img src="imagem.png" alt="Foto 2">
+                <img src="imagem.png" alt="Foto 3">
+            </div>
+            <button class="prev" onclick="mudarSlide(-1)">&#10094;</button>
+            <button class="next" onclick="mudarSlide(1)">&#10095;</button>
+        </div>
+        <h2>lorem & lorem</h2>
+        
+        <div class="contador" id="contador"></div>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis sed tempora iure soluta nobis. Repellat fugiat possimus magnam ipsa recusandae voluptate vero maiores nulla ad labore, ab blanditiis dignissimos necessitatibus.</p>
+    </div>
+
+    <script>
+        let indiceSlide = 0;
+        const slides = document.getElementById("slides");
+        const totalSlides = slides.children.length;
+
+        function mudarSlide(direcao) {
+            indiceSlide = (indiceSlide + direcao + totalSlides) % totalSlides;
+            slides.style.transform = `translateX(-${indiceSlide * 100}%)`;
+        }
+
+        function atualizarContador() {
+            const inicioRelacionamento = new Date("2025-02-18T12:00:00");
+            const agora = new Date();
+            const diferenca = agora - inicioRelacionamento;
+
+            const segundos = Math.floor(diferenca / 1000) % 60;
+            const minutos = Math.floor(diferenca / (1000 * 60)) % 60;
+            const horas = Math.floor(diferenca / (1000 * 60 * 60)) % 24;
+            const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24)) % 30;
+            const meses = Math.floor(diferenca / (1000 * 60 * 60 * 24 * 30)) % 12;
+            const anos = Math.floor(diferenca / (1000 * 60 * 60 * 24 * 365));
+
+            document.getElementById("contador").innerText = `${anos} anos, ${meses} meses, ${dias} dias, ${horas} horas, ${minutos} minutos e ${segundos} segundos`;
+        }
+        setInterval(atualizarContador, 1000);
+        atualizarContador();
+    </script>
+</body>
+</html>
